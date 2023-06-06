@@ -80,6 +80,15 @@ const PasswordGeneratorForm = ({
       console.log({ result });
     });
     if (generatedPassword) {
+      navigator.clipboard.writeText(generatedPassword)
+        .then(() => {
+          console.log('Password copied to clipboard');
+          // Perform any additional actions after successful copy
+        })
+        .catch((error) => {
+          console.error('Error copying password:', error);
+          // Handle error, if any
+        });
       setCopyNotification(true);
       setTimeout(() => {
         setCopyNotification(false);
