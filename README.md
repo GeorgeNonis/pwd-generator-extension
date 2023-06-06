@@ -1,10 +1,10 @@
-### <h1>:exclamation: Color Picker - Nonis :exclamation:</h1>
+### <h1>:exclamation: Nonis - Password Generator :exclamation:</h1>
 
-### Target of Color Picker :triangular_flag_on_post:
+### Target of Password Generator :triangular_flag_on_post:
 
 <p>
-      <h3>Tool for Developers and UI/UX designers. Generator your color. Copy it. Add it to your palette and have it 
-      available for whenever you want!</h3>
+      <h3>Simple Passowrd Generator where you get to choose how strong the password should be by 5 criterias.
+      Length,Uppercases,Lowercases,Numbers,Special Characters!</h3>
 
 </p>
 
