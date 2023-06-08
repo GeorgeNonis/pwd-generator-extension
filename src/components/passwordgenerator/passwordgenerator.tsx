@@ -1,9 +1,6 @@
 import "../../App.css";
+import { PasswordGeneratorFormProps } from "./interfaces";
 import { usePasswordGenerator } from "./usePasswordGenerator";
-
-interface PasswordGeneratorFormProps {
-  onGeneratePassword: (password: string) => void;
-}
 
 const PasswordGeneratorForm = ({
   onGeneratePassword,

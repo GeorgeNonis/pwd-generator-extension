@@ -6,6 +6,7 @@ import { useState } from "react";
 export const useHistory = () => {
   const { pwds, history } = useSelector((state: IRootState) => state.pwds);
   const [copypwds, setCopyPwds] = useState<string[]>([]);
+  const [copyNotification, setCopyNotification] = useState(false);
   const dispatch = useDispatch();
 
   const onCheckPwd = (pwd: string, checked: boolean) => {
@@ -25,11 +26,19 @@ export const useHistory = () => {
     chrome.storage.sync.set({ pwds: [] }, () => {});
   };
 
+  const notificationHandler = () => {
+    setCopyNotification(true);
+    setTimeout(() => {
+      setCopyNotification(false);
+    }, 2000);
+  };
+
   const copySelected = () => {
     navigator.clipboard
       .writeText(copypwds.join(","))
       .then(() => {})
       .catch((error) => {});
+    notificationHandler();
   };
 
   const copyAll = () => {
@@ -37,18 +46,7 @@ export const useHistory = () => {
       .writeText(pwds.join(","))
       .then(() => {})
       .catch((error) => {});
-  };
-
-  const handleCopyPassword = (pwd: string) => {
-    navigator.clipboard
-      .writeText(pwd)
-      .then(() => {})
-      .catch((error) => {});
-
-    // setCopyNotification(true);
-    // setTimeout(() => {
-    //   setCopyNotification(false);
-    // }, 2000);
+    notificationHandler();
   };
 
   const disableCopySelected = copypwds.length === 0;
@@ -62,7 +60,6 @@ export const useHistory = () => {
   const handlers = {
     onCheckPwd,
     clearHistorry,
-    handleCopyPassword,
     clearHistoryHandler,
     copySelected,
     copyAll,
@@ -73,6 +70,7 @@ export const useHistory = () => {
     disableCopySelected,
     pwds,
     history,
+    copyNotification,
   };
   return {
     values,

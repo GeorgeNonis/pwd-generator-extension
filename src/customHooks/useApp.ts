@@ -4,13 +4,16 @@ import { IRootState } from "../store/store";
 import { historyHandler, historyPush, setPasswords } from "../store/pwds-slice";
 
 export const useApp = () => {
-  const { component, pwds } = useSelector((state: IRootState) => state.pwds);
+  const { component, pwds, history } = useSelector(
+    (state: IRootState) => state.pwds
+  );
   const dispatch = useDispatch();
   // const [password, setPassword] = useState("");
 
   const handleGeneratePassword = (password: string) => {
-    // setPassword(password);
+    if (!history) return;
     dispatch(historyPush({ pwd: password }));
+
     chrome.storage.sync.set({ pwds: [...pwds, password] }, () => {});
   };
 

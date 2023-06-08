@@ -1,4 +1,5 @@
 import "../../App.css";
+import Option from "./option";
 import { components } from "../../config";
 import { useNavbar } from "./useNavbar";
 
@@ -9,14 +10,11 @@ const Navbar = () => {
     <div className="navbar">
       {components.map((comp) => {
         return (
-          <button
-            onClick={() => componentHandler(comp)}
-            style={
-              component === comp ? { backgroundColor: "#007bff" } : undefined
-            }
-          >
-            {comp}
-          </button>
+          <Option
+            comp={comp}
+            component={component}
+            componentHandler={componentHandler}
+          />
         );
       })}
     </div>
