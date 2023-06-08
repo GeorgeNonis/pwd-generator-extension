@@ -20,12 +20,25 @@ const pwds = createSlice({
       state.history = history;
     },
     setPasswords(state, { payload }) {
-      const pwds = payload;
+      const { pwds } = payload;
       state.pwds = pwds;
+    },
+    historyPush(state, { payload }) {
+      const { pwd } = payload;
+      state.pwds.push(pwd);
+    },
+    clearHistorry(state) {
+      state.pwds = [];
     },
   },
 });
 
-export const { changeCompo, historyHandler, setPasswords } = pwds.actions;
+export const {
+  changeCompo,
+  historyHandler,
+  setPasswords,
+  historyPush,
+  clearHistorry,
+} = pwds.actions;
 
 export default pwds.reducer;

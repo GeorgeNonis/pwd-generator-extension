@@ -1,22 +1,17 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../store/store";
-import { historyHandler, setPasswords } from "../store/pwds-slice";
+import { historyHandler, historyPush, setPasswords } from "../store/pwds-slice";
 
 export const useApp = () => {
   const { component, pwds } = useSelector((state: IRootState) => state.pwds);
   const dispatch = useDispatch();
-  const [password, setPassword] = useState("");
-  // const [pwds, setPwds] = useState<string[]>([]);
-  const handleGeneratePassword = (password: string) => {
-    setPassword(password);
+  // const [password, setPassword] = useState("");
 
-    // setPwds((prevState) => {
-    //   console.log(typeof password);
-    //   return [...prevState, `${password}`];
-    // });
-    dispatch(setPasswords({ pwds }));
-    chrome.storage.sync.set({ pwds }, () => {});
+  const handleGeneratePassword = (password: string) => {
+    // setPassword(password);
+    dispatch(historyPush({ pwd: password }));
+    chrome.storage.sync.set({ pwds: [...pwds, password] }, () => {});
   };
 
   useEffect(() => {

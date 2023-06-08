@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
 import "../../App.css";
+import { usePasswordGenerator } from "./usePasswordGenerator";
 
 interface PasswordGeneratorFormProps {
   onGeneratePassword: (password: string) => void;
@@ -8,100 +8,32 @@ interface PasswordGeneratorFormProps {
 const PasswordGeneratorForm = ({
   onGeneratePassword,
 }: PasswordGeneratorFormProps) => {
-  const [passwordLength, setPasswordLength] = useState(8);
-  const [includeUppercase, setIncludeUppercase] = useState(true);
-  const [includeLowercase, setIncludeLowercase] = useState(true);
-  const [includeNumbers, setIncludeNumbers] = useState(true);
-  const [includeSpecialCharacters, setIncludeSpecialCharacters] =
-    useState(false);
-  const [showPasswordStrength, setShowPasswordStrength] = useState(false);
-  const [generatedPassword, setGeneratedPassword] = useState("");
-
-  const [copyNotification, setCopyNotification] = useState(false);
-  const handleGeneratePassword = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Generate password logic
-    let password = generatePassword();
-    setGeneratedPassword(password);
-
-    // Call the onGeneratePassword callback with the generated password
-    onGeneratePassword(password);
-  };
-
-  const generatePassword = (): string => {
-    let characterSet = "";
-
-    if (includeUppercase) {
-      characterSet += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    }
-
-    if (includeLowercase) {
-      characterSet += "abcdefghijklmnopqrstuvwxyz";
-    }
-
-    if (includeNumbers) {
-      characterSet += "0123456789";
-    }
-
-    if (includeSpecialCharacters) {
-      characterSet += "!@#$%^&*()_-+=<>?/:";
-    }
-
-    if (characterSet.length === 0) {
-      // Handle case where no character set is selected
-      return "";
-    }
-
-    let password = "";
-
-    for (let i = 0; i < passwordLength; i++) {
-      const randomIndex = Math.floor(Math.random() * characterSet.length);
-      password += characterSet[randomIndex];
-    }
-
-    return password;
-  };
-
+  const { handlers, values } = usePasswordGenerator({ onGeneratePassword });
   const passwordStrengthIndicator = Array.from(
-    { length: passwordLength },
+    { length: values.passwordLength },
     (_, index) => (
       <div
         key={index}
         className={`password-strength-indicator-bar ${
-          generatedPassword.length > index ? "filled" : ""
+          values.generatedPassword.length > index ? "filled" : ""
         }`}
       ></div>
     )
   );
 
-  const handleCopyPassword = () => {
-    if (generatedPassword) {
-      navigator.clipboard
-        .writeText(generatedPassword)
-        .then(() => {})
-        .catch((error) => {});
-      setCopyNotification(true);
-      setTimeout(() => {
-        setCopyNotification(false);
-      }, 2000);
-    }
-    chrome.storage.sync.set({ colors: "changed" }, () => {});
-  };
-
   return (
     <>
       <form
         className="password-generator-form"
-        onSubmit={handleGeneratePassword}
+        onSubmit={handlers.handleGeneratePassword}
       >
         <div className="form-group">
           <label htmlFor="passwordLength">Password Length:</label>
           <input
             type="number"
             id="passwordLength"
-            value={passwordLength}
-            onChange={(e) => setPasswordLength(Number(e.target.value))}
+            value={values.passwordLength}
+            onChange={(e) => handlers.setPasswordLength(Number(e.target.value))}
             min={1}
             max={20}
             step={1}
@@ -111,8 +43,8 @@ const PasswordGeneratorForm = ({
           <label>
             <input
               type="checkbox"
-              checked={includeUppercase}
-              onChange={(e) => setIncludeUppercase(e.target.checked)}
+              checked={values.includeUppercase}
+              onChange={(e) => handlers.setIncludeUppercase(e.target.checked)}
             />
             Include Uppercase Letters
           </label>
@@ -121,8 +53,8 @@ const PasswordGeneratorForm = ({
           <label>
             <input
               type="checkbox"
-              checked={includeLowercase}
-              onChange={(e) => setIncludeLowercase(e.target.checked)}
+              checked={values.includeLowercase}
+              onChange={(e) => handlers.setIncludeLowercase(e.target.checked)}
             />
             Include Lowercase Letters
           </label>
@@ -131,8 +63,8 @@ const PasswordGeneratorForm = ({
           <label>
             <input
               type="checkbox"
-              checked={includeNumbers}
-              onChange={(e) => setIncludeNumbers(e.target.checked)}
+              checked={values.includeNumbers}
+              onChange={(e) => handlers.setIncludeNumbers(e.target.checked)}
             />
             Include Numbers
           </label>
@@ -141,8 +73,10 @@ const PasswordGeneratorForm = ({
           <label>
             <input
               type="checkbox"
-              checked={includeSpecialCharacters}
-              onChange={(e) => setIncludeSpecialCharacters(e.target.checked)}
+              checked={values.includeSpecialCharacters}
+              onChange={(e) =>
+                handlers.setIncludeSpecialCharacters(e.target.checked)
+              }
             />
             Include Special Characters
           </label>
@@ -151,13 +85,15 @@ const PasswordGeneratorForm = ({
           <label>
             <input
               type="checkbox"
-              checked={showPasswordStrength}
-              onChange={(e) => setShowPasswordStrength(e.target.checked)}
+              checked={values.showPasswordStrength}
+              onChange={(e) =>
+                handlers.setShowPasswordStrength(e.target.checked)
+              }
             />
             Show Password Strength
           </label>
         </div>
-        {showPasswordStrength && (
+        {values.showPasswordStrength && (
           <div className="form-group">
             <label>Password Strength:</label>
             <div className="password-strength-indicator">
@@ -166,19 +102,19 @@ const PasswordGeneratorForm = ({
           </div>
         )}
         <button type="submit">Generate Password</button>
-        {generatedPassword && (
+        {values.generatedPassword && (
           <div className="generated-password">
-            <input type="text" value={generatedPassword} readOnly />
-            <button type="button" onClick={handleCopyPassword}>
+            <input type="text" value={values.generatedPassword} readOnly />
+            <button type="button" onClick={handlers.handleCopyPassword}>
               Copy
             </button>
-            {copyNotification && (
+            {values.copyNotification && (
               <div className="notification">Password copied!</div>
             )}
           </div>
         )}
       </form>
-      <h3>{generatedPassword ?? undefined}</h3>
+      <h3>{values.generatedPassword ?? undefined}</h3>
     </>
   );
 };
