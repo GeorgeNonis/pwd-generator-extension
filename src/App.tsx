@@ -1,17 +1,32 @@
-import { useState } from "react";
 import "./App.css";
-import PasswordGeneratorForm from "./components/passwordgenerator";
+import { useApp } from "./customHooks/useApp";
+import {
+  PasswordGeneratorForm,
+  Passwords,
+  Settings,
+  Navbar,
+} from "./components";
 
 const App = () => {
-  const [password, setPassword] = useState("");
-  const handleGeneratePassword = (password: string) => {
-    setPassword(password);
+  const { handleGeneratePassword, values } = useApp();
+
+  interface Components {
+    [key: string]: JSX.Element;
+  }
+
+  const components: Components = {
+    generator: (
+      <PasswordGeneratorForm onGeneratePassword={handleGeneratePassword} />
+    ),
+    settings: <Settings />,
+    history: <Passwords />,
   };
+
   return (
     <div className="App">
       <h1 className="title">Nonis Password Generator</h1>
-      <PasswordGeneratorForm onGeneratePassword={handleGeneratePassword} />
-      <h3>{password ?? undefined}</h3>
+      <Navbar />
+      {components[values.component as keyof Components]}
     </div>
   );
 };
