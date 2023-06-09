@@ -6,8 +6,10 @@ import { useState } from "react";
 export const useHistory = () => {
   const { pwds, history } = useSelector((state: IRootState) => state.pwds);
   const [copypwds, setCopyPwds] = useState<string[]>([]);
+  const [selectState, setSelectState] = useState(false);
   const [copyNotification, setCopyNotification] = useState(false);
   const dispatch = useDispatch();
+  const disableCopySelected = copypwds.length === 0;
 
   const onCheckPwd = (pwd: string, checked: boolean) => {
     if (checked) {
@@ -49,7 +51,10 @@ export const useHistory = () => {
     notificationHandler();
   };
 
-  const disableCopySelected = copypwds.length === 0;
+  const unSelectHandler = () => {
+    setSelectState(!selectState);
+    setCopyPwds([]);
+  };
 
   const disableStyle = {
     cursor: "not-allowed",
@@ -63,6 +68,7 @@ export const useHistory = () => {
     clearHistoryHandler,
     copySelected,
     copyAll,
+    unSelectHandler,
   };
 
   const values = {
@@ -71,6 +77,7 @@ export const useHistory = () => {
     pwds,
     history,
     copyNotification,
+    selectState,
   };
   return {
     values,

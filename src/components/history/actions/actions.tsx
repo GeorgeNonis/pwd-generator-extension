@@ -8,11 +8,19 @@ const Actions = ({ handlers, values }: ActionsProps) => {
       </button>
       <button
         onClick={handlers.copySelected}
-        disabled={values.disableCopySelected}
         className="copyselected"
+        disabled={values.disableCopySelected}
         style={values.disableCopySelected ? values.disableStyle : undefined}
       >
         Copy Selected
+      </button>
+      <button
+        onClick={handlers.unSelectHandler}
+        className="unselectall"
+        disabled={values.disableCopySelected}
+        style={values.disableCopySelected ? values.disableStyle : undefined}
+      >
+        None
       </button>
       <button onClick={handlers.copyAll} className="copyall">
         Copy All

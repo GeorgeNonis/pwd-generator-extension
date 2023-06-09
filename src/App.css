@@ -80,14 +80,12 @@ body {
 }
 
 .generated-password {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
   margin-top: 1rem;
 }
 
 .generated-password input {
-  flex-grow: 1;
+  grid-row: 1;
   margin-right: 0.5rem;
   padding: 0.5rem;
   border: none;
@@ -97,6 +95,7 @@ body {
 }
 
 .generated-password button {
+  grid-row: 1;
   background-color: #007bff;
   color: #fff;
   padding: 0.5rem 1rem;
@@ -115,8 +114,9 @@ body {
 }
 
 .notification {
-  position: absolute;
-  bottom: 3rem;
+  grid-row: 2/3;
+  grid-column: 1/3;
+  margin-top: 1rem;
   padding: 0.5rem;
   background-color: #007bff;
   color: #fff;
@@ -125,11 +125,7 @@ body {
 }
 
 .notification-history {
-  position: absolute;
-  bottom: 1rem;
-  left: 50%;
-  right: 50%;
-  transform: translateX(-50%);
+  margin-inline: auto;
   padding: 0.5rem;
   background-color: #007bff;
   color: #fff;

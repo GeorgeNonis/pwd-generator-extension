@@ -5,6 +5,7 @@ export interface ActionsProps {
     clearHistoryHandler: () => void;
     copySelected: () => void;
     copyAll: () => void;
+    unSelectHandler: () => void;
   };
   values: {
     disableStyle: {
