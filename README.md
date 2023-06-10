@@ -77,20 +77,22 @@ These instructions will get you a copy of the project up and running on your loc
 1. Clone the repository.
 2. Install the required node modules by running the following command:
 
-```bash
-npm install
-:computer: Development
+## :computer: Development
+
 In the project directory, you can run the following scripts:
 
-npm run build: Bundles the extension for production.
-npm run start: Starts the development mode and watches for changes.
-:book: Learn More
+- `npm run build`: Bundles the extension for production.
+- `npm run start`: Starts the development mode and watches for changes.
+
+## :book: Learn More
+
 To learn more about how Nonis was created, you can refer to the following documentation:
 
-Create React App documentation
-React documentation
-:bulb: Contributing
+- [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started)
+- [React documentation](https://reactjs.org/)
+
+## :bulb: Contributing
+
 Contributions, comments, and suggestions are welcome! Feel free to open an issue or submit a pull request with any improvements you'd like to make.
 
 Enjoy using Nonis and keep your passwords secure!
-```
