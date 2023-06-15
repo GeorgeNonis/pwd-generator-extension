@@ -8,6 +8,7 @@ Nonis is a powerful password generator designed to provide you with secure and c
 
 ## :hammer_and_wrench: Technologies Used
 
+s
 Nonis is built using the following technologies:
 
 - ![Typescript](./readme_imgs/typescript.png) Typescript
