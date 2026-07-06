@@ -3,29 +3,27 @@ import { ActionsProps } from "./interfaces";
 const Actions = ({ handlers, values }: ActionsProps) => {
   return (
     <div className="actions">
-      <button onClick={handlers.clearHistoryHandler} className="clearhistory">
-        Clear History
+      <button
+        type="button"
+        onClick={handlers.clearHistoryHandler}
+        className="btn btn-ghost"
+      >
+        Clear
       </button>
       <button
-        onClick={handlers.copySelected}
-        className="copyselected"
-        disabled={values.disableCopySelected}
-        style={values.disableCopySelected ? values.disableStyle : undefined}
+        type="button"
+        onClick={handlers.copyAll}
+        className="btn btn-secondary"
       >
-        Copy Selected
+        Copy all
       </button>
-      <button
-        onClick={handlers.unSelectHandler}
-        className="unselectall"
-        disabled={values.disableCopySelected}
-        style={values.disableCopySelected ? values.disableStyle : undefined}
-      >
-        None
-      </button>
-      <button onClick={handlers.copyAll} className="copyall">
-        Copy All
-      </button>
+      {values.copyNotification && (
+        <div className="notification-history" role="status">
+          Copied
+        </div>
+      )}
     </div>
   );
 };
+
 export default Actions;

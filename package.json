@@ -28,7 +28,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "webpack --config webpack.config.js",
-    "watch": "webpack -w --config webpack.config.js"
+    "watch": "webpack -w --config webpack.config.js",
+    "test": "react-scripts test --watchAll=false",
+    "test:watch": "react-scripts test"
   },
   "devDependencies": {
     "@types/react-color": "^3.0.6",

@@ -5,25 +5,40 @@ import { useHistory } from "./useHistory";
 
 const History = () => {
   const { handlers, values } = useHistory();
-  const notification = values.copyNotification && (
-    <div className="notification-history">Copied!</div>
-  );
+
+  if (!values.history) {
+    return (
+      <div className="empty-state">
+        <p>History is disabled.</p>
+        <p className="empty-hint">Enable it in Settings to save generated passwords.</p>
+      </div>
+    );
+  }
+
+  if (values.pwds.length === 0) {
+    return (
+      <div className="empty-state">
+        <p>No passwords saved yet.</p>
+        <p className="empty-hint">Generate a password with history enabled.</p>
+      </div>
+    );
+  }
+
   return (
     <div className="history">
-      {values.history ? (
-        values.pwds.length === 0 ? (
-          <p>No items found...</p>
-        ) : (
-          <>
-            <Passwords handlers={handlers} values={values} />
-            <Actions handlers={handlers} values={values} />
-            {notification}
-          </>
-        )
-      ) : (
-        <p>No items found...</p>
-      )}
+      <Passwords
+        handlers={{ onCopied: handlers.showCopyNotification }}
+        values={{ pwds: values.pwds }}
+      />
+      <Actions
+        handlers={{
+          clearHistoryHandler: handlers.clearHistoryHandler,
+          copyAll: handlers.copyAll,
+        }}
+        values={{ copyNotification: values.copyNotification }}
+      />
     </div>
   );
 };
+
 export default History;

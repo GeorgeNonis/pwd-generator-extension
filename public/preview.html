@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Password Generator Preview</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      window.chrome = {
+        storage: {
+          sync: {
+            get: function (keys, cb) {
+              cb({ history: false, pwds: [] });
+            },
+            set: function (_data, cb) {
+              if (cb) cb();
+            },
+          },
+        },
+      };
+    </script>
+  </head>
+  <body>
+    <script defer src="index.js"></script>
+  </body>
+</html>

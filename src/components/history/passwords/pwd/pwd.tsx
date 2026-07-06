@@ -1,25 +1,30 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { MdCheck, MdContentCopy } from "react-icons/md";
 import { PwdProps } from "../../interfaces";
-import { usePwd } from "./usePwd";
 
-const Pwd = ({ ...rest }: PwdProps) => {
-  const { pwd, onCheckPwd, selectState } = rest;
-  const { checkbox, setCheckbox } = usePwd(selectState);
+const Pwd = ({ pwd, onCopied }: PwdProps) => {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(pwd);
+    setCopied(true);
+    onCopied();
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
-    <label htmlFor={pwd} className="pwdlabel">
-      {pwd}
-      <input
-        type="checkbox"
-        id={pwd}
-        name={pwd}
-        checked={checkbox}
-        onChange={(e) => {
-          setCheckbox(e.target.checked);
-          onCheckPwd(pwd, e.target.checked);
-        }}
-      />
-    </label>
+    <div className="pwd-row">
+      <span className="pwd-text">{pwd}</span>
+      <button
+        type="button"
+        className={`btn-copy ${copied ? "copied" : ""}`}
+        onClick={handleCopy}
+        aria-label={copied ? "Copied" : `Copy ${pwd}`}
+      >
+        {copied ? <MdCheck aria-hidden="true" /> : <MdContentCopy aria-hidden="true" />}
+      </button>
+    </div>
   );
 };
+
 export default Pwd;

@@ -10,23 +10,24 @@ import {
 const App = () => {
   const { handleGeneratePassword, values } = useApp();
 
-  interface Components {
-    [key: string]: JSX.Element;
-  }
-
-  const components: Components = {
+  const views = {
     generator: (
       <PasswordGeneratorForm onGeneratePassword={handleGeneratePassword} />
     ),
     settings: <Settings />,
     history: <Passwords />,
-  };
+  } as const;
 
   return (
     <div className="App">
-      <h1 className="title">Nonis Password Generator</h1>
+      <header className="app-header">
+        <h1 className="title">Password Generator</h1>
+        <p className="subtitle">Secure passwords, one click</p>
+      </header>
       <Navbar />
-      {components[values.component as keyof Components]}
+      <main className="app-main">
+        {views[values.component as keyof typeof views]}
+      </main>
     </div>
   );
 };

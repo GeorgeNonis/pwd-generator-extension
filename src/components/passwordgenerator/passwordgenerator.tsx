@@ -1,73 +1,81 @@
 import "../../App.css";
 import { PasswordGeneratorFormProps } from "./interfaces";
 import { usePasswordGenerator } from "./usePasswordGenerator";
+import { getStrengthFillCount } from "../../lib/password";
 
 const PasswordGeneratorForm = ({
   onGeneratePassword,
 }: PasswordGeneratorFormProps) => {
   const { handlers, values } = usePasswordGenerator({ onGeneratePassword });
+
+  const filledBars = getStrengthFillCount(
+    values.passwordLength,
+    values.generatedPassword.length
+  );
+
   const passwordStrengthIndicator = Array.from(
     { length: values.passwordLength },
     (_, index) => (
       <div
         key={index}
-        className={`password-strength-indicator-bar ${
-          values.generatedPassword.length > index ? "filled" : ""
-        }`}
-      ></div>
+        className={`strength-bar ${index < filledBars ? "filled" : ""}`}
+        aria-hidden="true"
+      />
     )
   );
 
   return (
-    <>
-      <form
-        className="password-generator-form"
-        onSubmit={handlers.handleGeneratePassword}
-      >
-        <div className="form-group">
-          <label htmlFor="passwordLength">Password Length:</label>
+    <form
+      className="password-generator-form"
+      onSubmit={handlers.handleGeneratePassword}
+    >
+      <div className="form-section">
+        <div className="form-group length-group">
+          <div className="length-header">
+            <label htmlFor="passwordLength">Length</label>
+            <span className="length-value">{values.passwordLength}</span>
+          </div>
           <input
-            type="number"
+            type="range"
             id="passwordLength"
+            className="length-slider"
             value={values.passwordLength}
-            onChange={(e) => handlers.setPasswordLength(Number(e.target.value))}
-            min={1}
-            max={20}
+            onChange={(e) =>
+              handlers.setPasswordLength(Number(e.target.value))
+            }
+            min={4}
+            max={32}
             step={1}
           />
         </div>
-        <div className="form-group">
-          <label>
+
+        <fieldset className="options-fieldset">
+          <legend>Character sets</legend>
+          <label className="option-row">
             <input
               type="checkbox"
               checked={values.includeUppercase}
               onChange={(e) => handlers.setIncludeUppercase(e.target.checked)}
             />
-            Include Uppercase Letters
+            Uppercase (A–Z)
           </label>
-        </div>
-        <div className="form-group">
-          <label>
+          <label className="option-row">
             <input
               type="checkbox"
               checked={values.includeLowercase}
               onChange={(e) => handlers.setIncludeLowercase(e.target.checked)}
             />
-            Include Lowercase Letters
+            Lowercase (a–z)
           </label>
-        </div>
-        <div className="form-group">
-          <label>
+          <label className="option-row">
             <input
               type="checkbox"
               checked={values.includeNumbers}
               onChange={(e) => handlers.setIncludeNumbers(e.target.checked)}
             />
-            Include Numbers
+            Numbers (0–9)
           </label>
-        </div>
-        <div className="form-group">
-          <label>
+          <label className="option-row">
             <input
               type="checkbox"
               checked={values.includeSpecialCharacters}
@@ -75,11 +83,9 @@ const PasswordGeneratorForm = ({
                 handlers.setIncludeSpecialCharacters(e.target.checked)
               }
             />
-            Include Special Characters
+            Symbols (!@#$…)
           </label>
-        </div>
-        <div className="form-group">
-          <label>
+          <label className="option-row">
             <input
               type="checkbox"
               checked={values.showPasswordStrength}
@@ -87,32 +93,45 @@ const PasswordGeneratorForm = ({
                 handlers.setShowPasswordStrength(e.target.checked)
               }
             />
-            Show Password Strength
+            Show strength indicator
           </label>
-        </div>
+        </fieldset>
+
         {values.showPasswordStrength && (
-          <div className="form-group">
-            <label>Password Strength:</label>
-            <div className="password-strength-indicator">
-              {passwordStrengthIndicator}
+          <div className="strength-section" aria-label="Password strength">
+            <div className="strength-bars">{passwordStrengthIndicator}</div>
+          </div>
+        )}
+      </div>
+
+      <button type="submit" className="btn btn-primary">
+        Generate password
+      </button>
+
+      {values.generatedPassword && (
+        <div className="generated-password">
+          <input
+            type="text"
+            className="password-output"
+            value={values.generatedPassword}
+            readOnly
+            aria-label="Generated password"
+          />
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={handlers.handleCopyPassword}
+          >
+            Copy
+          </button>
+          {values.copyNotification && (
+            <div className="notification" role="status">
+              Copied to clipboard
             </div>
-          </div>
-        )}
-        <button type="submit">Generate Password</button>
-        {values.generatedPassword && (
-          <div className="generated-password">
-            <input type="text" value={values.generatedPassword} readOnly />
-            <button type="button" onClick={handlers.handleCopyPassword}>
-              Copy
-            </button>
-            {values.copyNotification && (
-              <div className="notification">Password copied!</div>
-            )}
-          </div>
-        )}
-      </form>
-      <h3>{values.generatedPassword ?? undefined}</h3>
-    </>
+          )}
+        </div>
+      )}
+    </form>
   );
 };
 

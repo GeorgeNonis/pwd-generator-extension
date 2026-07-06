@@ -7,17 +7,17 @@ const Navbar = () => {
   const { componentHandler, component } = useNavbar();
 
   return (
-    <div className="navbar">
-      {components.map((comp) => {
-        return (
-          <Option
-            comp={comp}
-            component={component}
-            componentHandler={componentHandler}
-          />
-        );
-      })}
-    </div>
+    <nav className="navbar" aria-label="Extension sections">
+      {components.map((comp) => (
+        <Option
+          key={comp}
+          comp={comp}
+          component={component}
+          componentHandler={componentHandler}
+        />
+      ))}
+    </nav>
   );
 };
+
 export default Navbar;

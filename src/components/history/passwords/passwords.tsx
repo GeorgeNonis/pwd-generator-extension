@@ -4,16 +4,11 @@ import Pwd from "./pwd/pwd";
 const Passwords = ({ values, handlers }: PasswordsProps) => {
   return (
     <div className="passwords">
-      {values.pwds.map((pwd) => {
-        return (
-          <Pwd
-            onCheckPwd={handlers.onCheckPwd}
-            selectState={values.selectState}
-            pwd={pwd}
-          />
-        );
-      })}
+      {values.pwds.map((pwd) => (
+        <Pwd key={pwd} pwd={pwd} onCopied={handlers.onCopied} />
+      ))}
     </div>
   );
 };
+
 export default Passwords;
