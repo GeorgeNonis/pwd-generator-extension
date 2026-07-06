@@ -63,7 +63,7 @@ Spec-driven behaviors for the Password Generator extension. Tests in `src/**/*.t
 
 | ID | Behavior | Acceptance |
 |----|----------|------------|
-| APP-01 | Hydrate from storage | On mount, reads `history` and `pwds` from chrome storage |
+| APP-01 | Hydrate from storage | On mount, reads `history`, `pwds`, `theme`, `excludeAmbiguous` from chrome storage |
 | APP-02 | Save on generate when history on | New password appended to store + storage when `history === true` |
 | APP-03 | Skip save when history off | Generate does not persist when `history === false` |
 
