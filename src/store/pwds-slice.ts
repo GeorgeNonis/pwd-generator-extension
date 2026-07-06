@@ -5,6 +5,8 @@ const initialState: InitialState = {
   component: "generator",
   history: false,
   pwds: [],
+  theme: "dark",
+  excludeAmbiguous: false,
 };
 
 const pwds = createSlice({
@@ -30,6 +32,12 @@ const pwds = createSlice({
     clearHistorry(state) {
       state.pwds = [];
     },
+    themeHandler(state, { payload }) {
+      state.theme = payload.theme;
+    },
+    excludeAmbiguousHandler(state, { payload }) {
+      state.excludeAmbiguous = payload.excludeAmbiguous;
+    },
   },
 });
 
@@ -39,6 +47,8 @@ export const {
   setPasswords,
   historyPush,
   clearHistorry,
+  themeHandler,
+  excludeAmbiguousHandler,
 } = pwds.actions;
 
 export default pwds.reducer;

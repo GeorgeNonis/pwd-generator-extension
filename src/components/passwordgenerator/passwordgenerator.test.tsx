@@ -1,7 +1,8 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import PasswordGeneratorForm from "./passwordgenerator";
 import { installChromeMock } from "../../test-utils/chromeMock";
+import { renderWithProviders } from "../../test-utils/render";
 
 describe("PasswordGeneratorForm (UI-GEN)", () => {
   const onGeneratePassword = jest.fn();
@@ -15,7 +16,9 @@ describe("PasswordGeneratorForm (UI-GEN)", () => {
   });
 
   it("UI-GEN-01: renders length control and character toggles", () => {
-    render(<PasswordGeneratorForm onGeneratePassword={onGeneratePassword} />);
+    renderWithProviders(
+      <PasswordGeneratorForm onGeneratePassword={onGeneratePassword} />
+    );
 
     expect(screen.getByLabelText(/^length$/i)).toBeInTheDocument();
     expect(screen.getByText(/uppercase/i)).toBeInTheDocument();
@@ -25,7 +28,9 @@ describe("PasswordGeneratorForm (UI-GEN)", () => {
   });
 
   it("UI-GEN-06: strength bars hidden when toggled off", async () => {
-    render(<PasswordGeneratorForm onGeneratePassword={onGeneratePassword} />);
+    renderWithProviders(
+      <PasswordGeneratorForm onGeneratePassword={onGeneratePassword} />
+    );
 
     await userEvent.click(screen.getByText(/show strength indicator/i));
 
@@ -33,7 +38,9 @@ describe("PasswordGeneratorForm (UI-GEN)", () => {
   });
 
   it("UI-GEN-07: strength bars appear after generate", async () => {
-    render(<PasswordGeneratorForm onGeneratePassword={onGeneratePassword} />);
+    renderWithProviders(
+      <PasswordGeneratorForm onGeneratePassword={onGeneratePassword} />
+    );
 
     await userEvent.click(
       screen.getByRole("button", { name: /generate password/i })

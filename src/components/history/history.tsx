@@ -34,6 +34,7 @@ const History = () => {
         handlers={{
           clearHistoryHandler: handlers.clearHistoryHandler,
           copyAll: handlers.copyAll,
+          exportHistory: handlers.exportHistory,
         }}
         values={{ copyNotification: values.copyNotification }}
       />

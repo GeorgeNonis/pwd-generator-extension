@@ -2,6 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "../../store/store";
 import { clearHistorry } from "../../store/pwds-slice";
 import { useState } from "react";
+import {
+  buildHistoryExportContent,
+  downloadTextFile,
+  HISTORY_EXPORT_FILENAME,
+} from "../../lib/exportHistory";
 
 export const useHistory = () => {
   const { pwds, history } = useSelector((state: IRootState) => state.pwds);
@@ -23,9 +28,15 @@ export const useHistory = () => {
     showCopyNotification();
   };
 
+  const exportHistory = () => {
+    const content = buildHistoryExportContent(pwds);
+    downloadTextFile(content, HISTORY_EXPORT_FILENAME);
+  };
+
   const handlers = {
     clearHistoryHandler,
     copyAll,
+    exportHistory,
     showCopyNotification,
   };
 

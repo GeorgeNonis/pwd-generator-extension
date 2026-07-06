@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import "./App.css";
 import { useApp } from "./customHooks/useApp";
 import {
@@ -10,6 +11,11 @@ import {
 const App = () => {
   const { handleGeneratePassword, values } = useApp();
 
+  useEffect(() => {
+    const container = document.querySelector(".container");
+    container?.setAttribute("data-theme", values.theme);
+  }, [values.theme]);
+
   const views = {
     generator: (
       <PasswordGeneratorForm onGeneratePassword={handleGeneratePassword} />
@@ -19,7 +25,7 @@ const App = () => {
   } as const;
 
   return (
-    <div className="App">
+    <div className="App" data-theme={values.theme}>
       <header className="app-header">
         <h1 className="title">Password Generator</h1>
         <p className="subtitle">Secure passwords, one click</p>

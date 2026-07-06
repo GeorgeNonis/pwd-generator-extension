@@ -14,6 +14,8 @@ export function createTestStore(preloadedState?: Partial<InitialState>) {
             component: "generator",
             history: false,
             pwds: [],
+            theme: "dark",
+            excludeAmbiguous: false,
             ...preloadedState,
           },
         }

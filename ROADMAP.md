@@ -7,9 +7,9 @@ Post-polish improvements. Ordered by impact for users and portfolio signal.
 | Item | Why |
 |------|-----|
 | **Extension icon** | Professional toolbar presence; required for Web Store |
-| **Keyboard shortcut** | `Ctrl+Shift+P` or similar to open popup / regenerate |
+| ~~**Keyboard shortcut**~~ | Done — `_execute_action` + regenerate command |
 | **Password presets** | “Banking”, “WiFi”, “PIN” one-click length + charset combos |
-| **Export history** | Download selected passwords as `.txt` (local only, no cloud) |
+| ~~**Export history**~~ | Done — download `.txt` locally |
 
 ## Medium term
 
@@ -17,8 +17,8 @@ Post-polish improvements. Ordered by impact for users and portfolio signal.
 |------|-----|
 | **Chrome Web Store listing** | Public install link for wider distribution |
 | **Passphrase mode** | diceware-style memorable passwords |
-| **Exclude ambiguous chars** | Toggle to omit `0/O`, `1/l` etc. |
-| **Theme toggle** | Light mode for bright environments |
+| ~~**Exclude ambiguous chars**~~ | Done — settings toggle |
+| ~~**Theme toggle**~~ | Done — light/dark with storage persistence |
 
 ## Engineering
 
@@ -26,7 +26,7 @@ Post-polish improvements. Ordered by impact for users and portfolio signal.
 |------|-----|
 | **E2E with Playwright** | Extension popup smoke tests in real Chrome |
 | **CI workflow** | `npm test` + `npm run build` on push |
-| **Bundle size audit** | Drop unused deps (`react-color`, `react-scripts` dev split) |
+| ~~**Bundle size audit**~~ | Done — removed unused deps; dev/prod split |
 
 ## Out of scope (by design)
 

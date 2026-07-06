@@ -9,10 +9,22 @@ Manifest V3 Chrome extension — configurable password generation, clipboard cop
 ## Features
 
 - Length slider (4–32) with character-set toggles (upper, lower, numbers, symbols)
+- Exclude ambiguous characters (`0`, `O`, `1`, `l`, `I`) via Settings
 - Visual strength indicator
 - One-click copy with feedback
-- History tab with select / copy / clear (opt-in via Settings)
+- History tab with copy, export (`.txt`), and clear (opt-in via Settings)
+- Light / dark theme (persisted in `chrome.storage`)
+- Keyboard shortcuts (customize under `chrome://extensions/shortcuts`)
 - Spec-driven test suite — behaviors documented in [`docs/BEHAVIOR.md`](./docs/BEHAVIOR.md)
+
+## Keyboard shortcuts
+
+| Shortcut | Action |
+|----------|--------|
+| `Ctrl+Shift+P` (`Cmd+Shift+P` on Mac) | Open popup |
+| `Ctrl+Shift+G` (`Cmd+Shift+G` on Mac) | Regenerate password (when popup is open) |
+
+To change shortcuts: open `chrome://extensions/shortcuts` and find **Password Generator**.
 
 ## Install (development)
 
@@ -48,4 +60,4 @@ Password generation uses `crypto.getRandomValues`. Core logic is extracted to `s
 
 ## Roadmap
 
-See [`ROADMAP.md`](./ROADMAP.md) for planned improvements (export formats, keyboard shortcuts, Chrome Web Store).
+See [`ROADMAP.md`](./ROADMAP.md) for planned improvements (Chrome Web Store, passphrase mode, E2E).

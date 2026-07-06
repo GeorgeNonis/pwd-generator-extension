@@ -5,18 +5,33 @@
     <title>Password Generator Preview</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script>
-      window.chrome = {
-        storage: {
-          sync: {
-            get: function (keys, cb) {
-              cb({ history: false, pwds: [] });
-            },
-            set: function (_data, cb) {
-              if (cb) cb();
+      (function () {
+        var store = { history: false, pwds: [], theme: "dark", excludeAmbiguous: false };
+        window.chrome = {
+          storage: {
+            sync: {
+              get: function (keys, cb) {
+                var keyList = Array.isArray(keys) ? keys : [keys];
+                var result = {};
+                keyList.forEach(function (key) {
+                  if (key in store) result[key] = store[key];
+                });
+                cb(result);
+              },
+              set: function (data, cb) {
+                Object.assign(store, data);
+                if (cb) cb();
+              },
             },
           },
-        },
-      };
+          runtime: {
+            onMessage: {
+              addListener: function () {},
+              removeListener: function () {},
+            },
+          },
+        };
+      })();
     </script>
   </head>
   <body>

@@ -1,4 +1,6 @@
-export interface CheckboxProps {
-  history: boolean;
-  onChangeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
+export interface SettingToggleProps {
+  id: string;
+  label: string;
+  checked: boolean;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import History from "./history";
 import { installChromeMock } from "../../test-utils/chromeMock";
 import { renderWithProviders } from "../../test-utils/render";
+import * as exportHistory from "../../lib/exportHistory";
 
 describe("History (HIST)", () => {
   beforeEach(() => {
@@ -63,5 +64,28 @@ describe("History (HIST)", () => {
     await waitFor(() => {
       expect(screen.getByRole("button", { name: /^copied$/i })).toBeInTheDocument();
     });
+  });
+
+  it("EXPORT-01: export downloads txt with one password per line", async () => {
+    const downloadSpy = jest
+      .spyOn(exportHistory, "downloadTextFile")
+      .mockImplementation(() => {});
+
+    renderWithProviders(<History />, {
+      preloadedState: { history: true, pwds: ["one", "two"] },
+    });
+
+    await userEvent.click(screen.getByRole("button", { name: /^export$/i }));
+
+    expect(downloadSpy).toHaveBeenCalledWith("one\ntwo", "password-history.txt");
+    downloadSpy.mockRestore();
+  });
+
+  it("EXPORT-02: export not shown when history empty", () => {
+    renderWithProviders(<History />, {
+      preloadedState: { history: true, pwds: [] },
+    });
+
+    expect(screen.queryByRole("button", { name: /^export$/i })).not.toBeInTheDocument();
   });
 });

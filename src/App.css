@@ -1,4 +1,5 @@
-:root {
+:root,
+[data-theme="dark"] {
   --bg: #121214;
   --surface: #1c1c1f;
   --surface-raised: #252528;
@@ -15,6 +16,21 @@
   --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, sans-serif;
+}
+
+[data-theme="light"] {
+  --bg: #f4f4f5;
+  --surface: #ffffff;
+  --surface-raised: #f4f4f5;
+  --border: #e4e4e7;
+  --text: #18181b;
+  --text-muted: #71717a;
+  --accent: #4f46e5;
+  --accent-hover: #6366f1;
+  --accent-muted: rgba(79, 70, 229, 0.12);
+  --success: #16a34a;
+  --danger: #dc2626;
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 * {
@@ -45,6 +61,7 @@ body {
   display: flex;
   flex-direction: column;
   background-color: var(--bg);
+  color: var(--text);
 }
 
 .app-header {
@@ -57,6 +74,7 @@ body {
   font-weight: 600;
   margin: 0;
   letter-spacing: -0.02em;
+  color: var(--text);
 }
 
 .subtitle {
@@ -313,11 +331,12 @@ body {
   font-family: ui-monospace, "Cascadia Code", "Segoe UI Mono", monospace;
   word-break: break-all;
   text-align: left;
+  color: var(--text);
 }
 
 .actions {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 0.5rem;
 }
 
@@ -392,6 +411,7 @@ body {
   font-size: 0.875rem;
   cursor: pointer;
   line-height: 1.4;
+  color: var(--text);
 }
 
 .settings-toggle input {

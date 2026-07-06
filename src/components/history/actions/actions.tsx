@@ -17,6 +17,13 @@ const Actions = ({ handlers, values }: ActionsProps) => {
       >
         Copy all
       </button>
+      <button
+        type="button"
+        onClick={handlers.exportHistory}
+        className="btn btn-secondary"
+      >
+        Export
+      </button>
       {values.copyNotification && (
         <div className="notification-history" role="status">
           Copied

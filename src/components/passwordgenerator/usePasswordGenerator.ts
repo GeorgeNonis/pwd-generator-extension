@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { generatePassword, PasswordOptions } from "../../lib/password";
+import { IRootState } from "../../store/store";
 
 interface PasswordGeneratorFormProps {
   onGeneratePassword: (password: string) => void;
@@ -8,6 +10,9 @@ interface PasswordGeneratorFormProps {
 export const usePasswordGenerator = ({
   onGeneratePassword,
 }: PasswordGeneratorFormProps) => {
+  const excludeAmbiguous = useSelector(
+    (state: IRootState) => state.pwds.excludeAmbiguous
+  );
   const [passwordLength, setPasswordLength] = useState(12);
   const [includeUppercase, setIncludeUppercase] = useState(true);
   const [includeLowercase, setIncludeLowercase] = useState(true);
@@ -18,21 +23,46 @@ export const usePasswordGenerator = ({
   const [generatedPassword, setGeneratedPassword] = useState("");
   const [copyNotification, setCopyNotification] = useState(false);
 
-  const getOptions = (): PasswordOptions => ({
-    length: passwordLength,
-    includeUppercase,
-    includeLowercase,
-    includeNumbers,
-    includeSpecialCharacters,
-  });
+  const getOptions = useCallback(
+    (): PasswordOptions => ({
+      length: passwordLength,
+      includeUppercase,
+      includeLowercase,
+      includeNumbers,
+      includeSpecialCharacters,
+      excludeAmbiguous,
+    }),
+    [
+      passwordLength,
+      includeUppercase,
+      includeLowercase,
+      includeNumbers,
+      includeSpecialCharacters,
+      excludeAmbiguous,
+    ]
+  );
 
-  const handleGeneratePassword = (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const runGenerate = useCallback(() => {
     const password = generatePassword(getOptions());
     setGeneratedPassword(password);
     onGeneratePassword(password);
+  }, [getOptions, onGeneratePassword]);
+
+  const handleGeneratePassword = (e: React.FormEvent) => {
+    e.preventDefault();
+    runGenerate();
   };
+
+  useEffect(() => {
+    const listener = (message: { type?: string }) => {
+      if (message.type === "REGENERATE_PASSWORD") {
+        runGenerate();
+      }
+    };
+
+    chrome.runtime.onMessage.addListener(listener);
+    return () => chrome.runtime.onMessage.removeListener(listener);
+  }, [runGenerate]);
 
   const handleCopyPassword = async () => {
     if (!generatedPassword) return;

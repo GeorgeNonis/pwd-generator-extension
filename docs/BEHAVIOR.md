@@ -11,6 +11,7 @@ Spec-driven behaviors for the Password Generator extension. Tests in `src/**/*.t
 | GEN-03 | Empty pool returns empty string | No uppercase/lowercase/numbers/symbols → `""` |
 | GEN-04 | Uses only characters from enabled sets | Every character ∈ union of enabled sets |
 | GEN-05 | Cryptographic randomness by default | Uses `crypto.getRandomValues` (injectable in tests) |
+| GEN-06 | Exclude ambiguous characters | When `excludeAmbiguous` is true, pool omits `0`, `O`, `o`, `1`, `l`, `I`, `i` |
 
 ## Generator UI (`PasswordGeneratorForm`)
 
@@ -42,6 +43,8 @@ Spec-driven behaviors for the Password Generator extension. Tests in `src/**/*.t
 | HIST-04 | Copy all | Joins all passwords with comma, copies to clipboard |
 | HIST-05 | Copy single row | Each row has copy icon; copies that password to clipboard |
 | HIST-06 | Row copy feedback | Icon switches to checkmark briefly after copy |
+| EXPORT-01 | Export history | “Export” downloads `.txt` with one password per line (local only) |
+| EXPORT-02 | Export disabled when empty | Export control not offered when `pwds` is empty |
 
 ## Settings (`Settings`)
 
@@ -50,6 +53,11 @@ Spec-driven behaviors for the Password Generator extension. Tests in `src/**/*.t
 | SET-01 | History toggle | Checkbox reflects `history` from store |
 | SET-02 | Persist toggle | Changing checkbox writes `history` to chrome storage |
 | SET-03 | Security notice | Warning visible when settings tab is open |
+| SET-04 | Exclude ambiguous toggle | Checkbox reflects `excludeAmbiguous` from store |
+| SET-05 | Persist ambiguous toggle | Changing checkbox writes `excludeAmbiguous` to chrome storage |
+| THEME-01 | Theme toggle | Control switches between light and dark appearance |
+| THEME-02 | Persist theme | Changing theme writes `theme` to chrome storage |
+| THEME-03 | Hydrate theme | On mount, `theme` loaded from storage and applied to root |
 
 ## App integration (`useApp`)
 
@@ -68,3 +76,12 @@ Spec-driven behaviors for the Password Generator extension. Tests in `src/**/*.t
 | REDUX-03 | `setPasswords` | Replaces `pwds` array |
 | REDUX-04 | `historyPush` | Appends one password |
 | REDUX-05 | `clearHistorry` | Empties `pwds` |
+| REDUX-06 | `themeHandler` | Updates `theme` (`light` \| `dark`) |
+| REDUX-07 | `excludeAmbiguousHandler` | Updates `excludeAmbiguous` |
+
+## Keyboard shortcuts (`manifest.json` + `background.ts`)
+
+| ID | Behavior | Acceptance |
+|----|----------|------------|
+| SHORT-01 | Open popup shortcut | `_execute_action` bound to Ctrl+Shift+P (Cmd+Shift+P on Mac) |
+| SHORT-02 | Regenerate shortcut | `regenerate-password` command messages open popup to regenerate |

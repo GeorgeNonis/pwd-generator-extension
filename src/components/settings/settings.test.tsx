@@ -9,15 +9,19 @@ describe("Settings (SET)", () => {
     installChromeMock({ history: true });
     renderWithProviders(<Settings />, { preloadedState: { history: true } });
 
-    expect(screen.getByRole("checkbox")).toBeChecked();
+    expect(
+      screen.getByLabelText(/remember generated passwords/i)
+    ).toBeChecked();
   });
 
-  it("SET-02: toggling persists to chrome storage", async () => {
+  it("SET-02: toggling history persists to chrome storage", async () => {
     const chromeMock = installChromeMock({ history: false });
 
     renderWithProviders(<Settings />, { preloadedState: { history: false } });
 
-    await userEvent.click(screen.getByRole("checkbox"));
+    await userEvent.click(
+      screen.getByLabelText(/remember generated passwords/i)
+    );
 
     expect(chromeMock.storage.sync.set).toHaveBeenCalledWith(
       { history: true },
@@ -30,5 +34,39 @@ describe("Settings (SET)", () => {
     renderWithProviders(<Settings />);
 
     expect(screen.getByRole("note")).toHaveTextContent(/chrome sync storage/i);
+  });
+
+  it("SET-04 / SET-05: exclude ambiguous toggle reflects and persists", async () => {
+    const chromeMock = installChromeMock({ excludeAmbiguous: false });
+
+    renderWithProviders(<Settings />, {
+      preloadedState: { excludeAmbiguous: false },
+    });
+
+    const toggle = screen.getByLabelText(/exclude ambiguous characters/i);
+    expect(toggle).not.toBeChecked();
+
+    await userEvent.click(toggle);
+
+    expect(chromeMock.storage.sync.set).toHaveBeenCalledWith(
+      { excludeAmbiguous: true },
+      expect.any(Function)
+    );
+  });
+
+  it("THEME-01 / THEME-02: theme toggle reflects and persists", async () => {
+    const chromeMock = installChromeMock({ theme: "dark" });
+
+    renderWithProviders(<Settings />, { preloadedState: { theme: "dark" } });
+
+    const toggle = screen.getByLabelText(/light theme/i);
+    expect(toggle).not.toBeChecked();
+
+    await userEvent.click(toggle);
+
+    expect(chromeMock.storage.sync.set).toHaveBeenCalledWith(
+      { theme: "light" },
+      expect.any(Function)
+    );
   });
 });

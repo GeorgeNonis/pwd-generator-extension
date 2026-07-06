@@ -1,13 +1,21 @@
 import pwdsReducer, {
   changeCompo,
   clearHistorry,
+  excludeAmbiguousHandler,
   historyHandler,
   historyPush,
   setPasswords,
+  themeHandler,
 } from "./pwds-slice";
 
 describe("pwds slice (REDUX)", () => {
-  const initial = { component: "generator", history: false, pwds: [] as string[] };
+  const initial = {
+    component: "generator",
+    history: false,
+    pwds: [] as string[],
+    theme: "dark" as const,
+    excludeAmbiguous: false,
+  };
 
   it("REDUX-01: changeCompo updates component", () => {
     const state = pwdsReducer(initial, changeCompo({ comp: "history" }));
@@ -41,5 +49,18 @@ describe("pwds slice (REDUX)", () => {
       clearHistorry()
     );
     expect(state.pwds).toEqual([]);
+  });
+
+  it("REDUX-06: themeHandler updates theme", () => {
+    const state = pwdsReducer(initial, themeHandler({ theme: "light" }));
+    expect(state.theme).toBe("light");
+  });
+
+  it("REDUX-07: excludeAmbiguousHandler updates excludeAmbiguous", () => {
+    const state = pwdsReducer(
+      initial,
+      excludeAmbiguousHandler({ excludeAmbiguous: true })
+    );
+    expect(state.excludeAmbiguous).toBe(true);
   });
 });

@@ -13,7 +13,8 @@
 | `src/App.css` | All popup styling (primary UI touchpoint) |
 | `src/lib/password.ts` | Password generation (pure, tested) |
 | `docs/BEHAVIOR.md` | Spec IDs mapped to tests |
-| `manifest.json` | MV3, `storage` permission, popup action |
+| `manifest.json` | MV3, `storage` permission, popup action, commands, service worker |
+| `src/background.ts` | Handles `regenerate-password` keyboard command |
 | `webpack.config.js` | Build → `dist/` for Load unpacked |
 
 Popup size: ~23rem × 32rem fixed in CSS.

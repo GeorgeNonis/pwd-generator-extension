@@ -60,4 +60,28 @@ describe("password generation (GEN)", () => {
     expect(getStrengthFillCount(12, 8)).toBe(8);
     expect(getStrengthFillCount(8, 12)).toBe(8);
   });
+
+  it("GEN-06: excludes ambiguous characters when enabled", () => {
+    const charSet = buildCharacterSet({
+      ...baseOptions,
+      includeSpecialCharacters: true,
+      excludeAmbiguous: true,
+    });
+
+    expect(charSet).not.toMatch(/[0Oo1lIi]/);
+
+    const password = generatePassword(
+      {
+        length: 40,
+        includeUppercase: true,
+        includeLowercase: true,
+        includeNumbers: true,
+        includeSpecialCharacters: false,
+        excludeAmbiguous: true,
+      },
+      (max) => (max > 0 ? 0 : 0)
+    );
+
+    expect(password).not.toMatch(/[0Oo1lIi]/);
+  });
 });

@@ -69,4 +69,19 @@ describe("App integration", () => {
 
     expect(screen.getByText(/history is disabled/i)).toBeInTheDocument();
   });
+
+  it("THEME-03: applies theme from store to root", async () => {
+    installChromeMock({ theme: "light" });
+
+    const { container } = renderWithProviders(<App />, {
+      preloadedState: { theme: "light" },
+    });
+
+    await waitFor(() => {
+      expect(container.querySelector(".App")).toHaveAttribute(
+        "data-theme",
+        "light"
+      );
+    });
+  });
 });

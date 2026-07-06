@@ -4,12 +4,21 @@ export interface PasswordOptions {
   includeLowercase: boolean;
   includeNumbers: boolean;
   includeSpecialCharacters: boolean;
+  excludeAmbiguous?: boolean;
 }
 
 const UPPERCASE = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const LOWERCASE = "abcdefghijklmnopqrstuvwxyz";
 const NUMBERS = "0123456789";
 const SPECIAL = "!@#$%^&*()_-+=<>?/:";
+
+export const AMBIGUOUS_CHARACTERS = new Set(["0", "O", "o", "1", "l", "I", "i"]);
+
+export function filterAmbiguousCharacters(characterSet: string): string {
+  return [...characterSet]
+    .filter((char) => !AMBIGUOUS_CHARACTERS.has(char))
+    .join("");
+}
 
 export function buildCharacterSet(options: PasswordOptions): string {
   let characterSet = "";
@@ -18,6 +27,10 @@ export function buildCharacterSet(options: PasswordOptions): string {
   if (options.includeLowercase) characterSet += LOWERCASE;
   if (options.includeNumbers) characterSet += NUMBERS;
   if (options.includeSpecialCharacters) characterSet += SPECIAL;
+
+  if (options.excludeAmbiguous) {
+    characterSet = filterAmbiguousCharacters(characterSet);
+  }
 
   return characterSet;
 }

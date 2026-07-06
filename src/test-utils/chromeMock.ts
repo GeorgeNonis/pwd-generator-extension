@@ -1,12 +1,16 @@
 type StorageState = {
   history: boolean;
   pwds: string[];
+  theme: "light" | "dark";
+  excludeAmbiguous: boolean;
 };
 
 export function createChromeMock(initial: Partial<StorageState> = {}) {
   const storage: StorageState = {
     history: false,
     pwds: [],
+    theme: "dark",
+    excludeAmbiguous: false,
     ...initial,
   };
 
@@ -34,6 +38,13 @@ export function createChromeMock(initial: Partial<StorageState> = {}) {
           if (cb) cb();
         }),
       },
+    },
+    runtime: {
+      onMessage: {
+        addListener: jest.fn(),
+        removeListener: jest.fn(),
+      },
+      sendMessage: jest.fn(),
     },
     getStorage: () => ({ ...storage }),
   };
