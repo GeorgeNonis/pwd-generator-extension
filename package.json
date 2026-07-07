@@ -13,7 +13,8 @@
     "build": "webpack --config webpack.config.js",
     "watch": "webpack -w --config webpack.config.js",
     "test": "react-scripts test --watchAll=false",
-    "test:watch": "react-scripts test"
+    "test:watch": "react-scripts test",
+    "capture:promo": "node scripts/capture-promo-tiles.mjs"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -27,6 +28,7 @@
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
     "html-webpack-plugin": "^5.5.0",
+    "puppeteer": "^24.43.1",
     "react-scripts": "5.0.1",
     "style-loader": "^3.3.1",
     "ts-loader": "^9.4.2",

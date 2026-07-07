@@ -2,6 +2,10 @@
 
 Manifest V3 Chrome extension — configurable password generation, clipboard copy, and optional history persisted via `chrome.storage.sync`.
 
+[![CI](https://github.com/GeorgeNonis/pwd-generator-extension/actions/workflows/ci.yml/badge.svg)](https://github.com/GeorgeNonis/pwd-generator-extension/actions/workflows/ci.yml)
+
+[![Available in the Chrome Web Store](https://storage.googleapis.com/chrome-gcs-upublic.appspot.com/webstore/v2/chrome_web_store.png)](https://chromewebstore.google.com/detail/password-generator-nonis/ciplnefaommlkglhkbabmpkckccimajp)
+
 | Before | After |
 |--------|-------|
 | ![Before UI](./readme_imgs/before.png) | ![After UI](./readme_imgs/after.png) |
@@ -54,6 +58,7 @@ Preview UI in a browser (chrome API mocked): serve `dist/` and open `js/preview.
 
 ## Chrome Web Store
 
+- [Install from Chrome Web Store](https://chromewebstore.google.com/detail/password-generator-nonis/ciplnefaommlkglhkbabmpkckccimajp)
 - Listing copy: [`docs/STORE_LISTING.md`](./docs/STORE_LISTING.md)
 - Graphic assets: [`docs/STORE_ASSETS.md`](./docs/STORE_ASSETS.md) + [`store_assets/`](./store_assets/)
 
@@ -67,4 +72,4 @@ Password generation uses `crypto.getRandomValues`. Core logic is extracted to `s
 
 ## Roadmap
 
-See [`ROADMAP.md`](./ROADMAP.md) for planned improvements (CI, E2E).
+See [`ROADMAP.md`](./ROADMAP.md) for planned improvements (E2E).

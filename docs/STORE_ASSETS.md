@@ -20,14 +20,38 @@ Toolbar / manifest icons (auto from build):
 | 48×48 | `icons/icon-48.png` |
 | 128×128 | `icons/icon-128.png` |
 
-## Optional promo tiles (not yet created)
+## Optional promo tiles
 
-| Asset | Size | Purpose |
-|-------|------|---------|
-| **Small promo tile** | 440×280 | Small promotional card in store discovery surfaces |
-| **Marquee promo tile** | 1400×560 | Wide hero banner for featured / editorial placement |
+| Asset | Size | File | Status |
+|-------|------|------|--------|
+| **Small promo tile** | 440×280 | `store_assets/promo-tile-small-440x280.png` | ✅ Icon + headline |
+| **Marquee promo tile** | 1400×560 | `store_assets/promo-tile-marquee-1400x560.png` | ✅ Hero + UI mockup |
 
-See [`STORE_LISTING.md`](./STORE_LISTING.md) for copy suggestions.
+Headlines: *Strong passwords. Zero cloud.* (small) · *Passwords & passphrases — offline & private* (marquee).
+
+Regenerate from HTML templates:
+
+```bash
+npm install
+npx puppeteer browsers install chrome   # first run only
+npm run capture:promo
+```
+
+Source templates: `scripts/promo-tiles/`.
+
+## Package upload (Developer Dashboard)
+
+The **Package** tab accepts a **`.zip` file only** — not a folder, not PNGs.
+
+1. `npm run build`
+2. Zip the **contents** of `dist/` (not the `dist` folder itself):
+
+```powershell
+cd dist
+Compress-Archive -Path manifest.json,icon.png,icons,js -DestinationPath ..\pwd-generator.zip -Force
+```
+
+`manifest.json` must be at the **root** of the zip. Screenshots, store icon, and promo tiles upload in separate **Store listing** fields.
 
 ## Remove from dashboard
 

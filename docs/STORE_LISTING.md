@@ -101,7 +101,26 @@ Not required for publish. Add when you want a polished store presence or if appl
 
 **Suggested headline copy:** `Strong passwords. Zero cloud.` or `Passwords & passphrases — offline & private`
 
-Assets would live in `store_assets/` (future session — see CONTINUATION next prompt).
+Assets live in `store_assets/` (see [`STORE_ASSETS.md`](./STORE_ASSETS.md)).
+
+| Asset | Size | File |
+|-------|------|------|
+| **Small promo tile** | 440 × 280 | `promo-tile-small-440x280.png` |
+| **Marquee promo tile** | 1400 × 560 | `promo-tile-marquee-1400x560.png` |
+
+---
+
+## Publishing
+
+| Step | Notes |
+|------|-------|
+| **Save Draft** | On each tab you changed (listing, privacy, package, etc.) |
+| **Submit for review** | Submits the **entire draft** — not per-tab |
+| **While in review** | Cannot edit until approved or rejected |
+
+**Live listing:** https://chromewebstore.google.com/detail/password-generator-nonis/ciplnefaommlkglhkbabmpkckccimajp
+
+Extension ID `ciplnefaommlkglhkbabmpkckccimajp` is permanent. URL slug may update if listing title changes from "Password Generator - Nonis" to "Password Generator".
 
 ---
 
@@ -128,10 +147,10 @@ You cannot add custom metrics to the listing. Improve conversion by:
 ## Visibility checklist (beyond listing)
 
 - [ ] Pin repo on GitHub profile
-- [ ] Add Chrome Web Store install link to README badge
+- [x] Add Chrome Web Store install link to README badge
 - [ ] LinkedIn / portfolio “Featured” with store link
 - [ ] Ask satisfied users for 5-star reviews (don't incentivize)
-- [ ] Ship v1.1.1+ with CI badge in README when CI lands
+- [x] CI badge in README (`.github/workflows/ci.yml`)
 - [ ] Consider `single purpose` clarity in privacy form — one job: generate passwords
 
 ---

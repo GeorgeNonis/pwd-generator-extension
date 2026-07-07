@@ -15,7 +15,7 @@ Post-polish improvements. Ordered by impact for users and portfolio signal.
 
 | Item | Why |
 |------|-----|
-| ~~**Chrome Web Store listing**~~ | In progress — v1.1.0 assets in `store_assets/`, copy in `docs/STORE_LISTING.md` |
+| ~~**Chrome Web Store listing**~~ | v1.1.0 submitted for review (2026-07-07) |
 | ~~**Passphrase mode**~~ | Done — diceware-style memorable passwords |
 | ~~**Exclude ambiguous chars**~~ | Done — settings toggle |
 | ~~**Theme toggle**~~ | Done — light/dark with storage persistence |
@@ -25,7 +25,7 @@ Post-polish improvements. Ordered by impact for users and portfolio signal.
 | Item | Why |
 |------|-----|
 | **E2E with Playwright** | Extension popup smoke tests in real Chrome |
-| **CI workflow** | `npm test` + `npm run build` on push |
+| ~~**CI workflow**~~ | Done — `.github/workflows/ci.yml` |
 | ~~**Bundle size audit**~~ | Done — removed unused deps; dev/prod split |
 
 ## Out of scope (by design)

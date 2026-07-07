@@ -25,6 +25,9 @@ yarn-error.log*
 
 dist
 
+# release artifacts
+*.zip
+
 # ai_skills symlinks (local only — wire via setup-cursor-skills script)
 .cursor/
 AI_GUIDELINES.md

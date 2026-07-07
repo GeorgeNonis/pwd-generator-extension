@@ -18,8 +18,10 @@
 | `icons/` | Extension icons 16 / 48 / 128 PNG |
 | `docs/BEHAVIOR.md` | Spec IDs mapped to tests |
 | `docs/STORE_LISTING.md` | Chrome Web Store copy + additional fields |
-| `docs/STORE_ASSETS.md` | Store graphic asset checklist |
-| `store_assets/` | Icons + 1280×800 screenshots for store upload |
+| `docs/STORE_ASSETS.md` | Store graphic asset checklist + package zip instructions |
+| `store_assets/` | Icons, screenshots, promo tiles for store upload |
+| `scripts/promo-tiles/` | HTML templates for promo tile regeneration |
+| `.github/workflows/ci.yml` | CI: `npm test` + `npm run build` on push/PR |
 | `manifest.json` | MV3, `storage` permission, popup action, commands, service worker |
 | `src/background.ts` | Handles `regenerate-password` keyboard command |
 | `webpack.config.js` | Build → `dist/` for Load unpacked |
@@ -32,8 +34,13 @@ Popup size: ~23rem × 32rem fixed in CSS.
 npm install
 npm run build    # production → dist/
 npm run watch    # rebuild on change
-npm test         # behavior specs
+npm test         # behavior specs (55 tests)
+npm run capture:promo   # regenerate promo tiles (requires Puppeteer + Chrome)
 ```
+
+**Chrome Web Store:** https://chromewebstore.google.com/detail/password-generator-nonis/ciplnefaommlkglhkbabmpkckccimajp
+
+Package upload: zip **contents** of `dist/` so `manifest.json` is at zip root — see `docs/STORE_ASSETS.md`.
 
 Load in Chrome: `chrome://extensions` → Developer mode → Load unpacked → **`dist`**
 
