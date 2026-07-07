@@ -17,8 +17,8 @@
 | `src/lib/exportHistory.ts` | History `.txt` export (pure, tested) |
 | `icons/` | Extension icons 16 / 48 / 128 PNG |
 | `docs/BEHAVIOR.md` | Spec IDs mapped to tests |
-| `docs/STORE_LISTING.md` | Chrome Web Store copy + additional fields |
-| `docs/STORE_ASSETS.md` | Store graphic asset checklist + package zip instructions |
+| `docs/STORE_LISTING.md` | Chrome Web Store copy (public paste-ready) |
+| `docs/STORE_ASSETS.md` | Store graphic assets + package zip instructions |
 | `store_assets/` | Icons, screenshots, promo tiles for store upload |
 | `scripts/promo-tiles/` | HTML templates for promo tile regeneration |
 | `.github/workflows/ci.yml` | CI: `npm test` + `npm run build` on push/PR |
@@ -37,10 +37,6 @@ npm run watch    # rebuild on change
 npm test         # behavior specs (55 tests)
 npm run capture:promo   # regenerate promo tiles (requires Puppeteer + Chrome)
 ```
-
-**Chrome Web Store:** https://chromewebstore.google.com/detail/password-generator-nonis/ciplnefaommlkglhkbabmpkckccimajp
-
-Package upload: zip **contents** of `dist/` so `manifest.json` is at zip root — see `docs/STORE_ASSETS.md`.
 
 Load in Chrome: `chrome://extensions` → Developer mode → Load unpacked → **`dist`**
 

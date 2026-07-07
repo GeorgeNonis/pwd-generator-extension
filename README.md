@@ -3,12 +3,9 @@
 Manifest V3 Chrome extension — configurable password generation, clipboard copy, and optional history persisted via `chrome.storage.sync`.
 
 [![CI](https://github.com/GeorgeNonis/pwd-generator-extension/actions/workflows/ci.yml/badge.svg)](https://github.com/GeorgeNonis/pwd-generator-extension/actions/workflows/ci.yml)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/ciplnefaommlkglhkbabmpkckccimajp?label=Install&logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/password-generator-nonis/ciplnefaommlkglhkbabmpkckccimajp)
 
-[![Available in the Chrome Web Store](https://storage.googleapis.com/chrome-gcs-upublic.appspot.com/webstore/v2/chrome_web_store.png)](https://chromewebstore.google.com/detail/password-generator-nonis/ciplnefaommlkglhkbabmpkckccimajp)
-
-| Before | After |
-|--------|-------|
-| ![Before UI](./readme_imgs/before.png) | ![After UI](./readme_imgs/after.png) |
+![Password Generator — password mode with presets](./store_assets/screenshot-01-generator.png)
 
 ## Features
 

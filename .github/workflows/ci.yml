@@ -17,10 +17,37 @@ jobs:
           node-version: "20"
           cache: npm
 
-      - run: npm ci
+      - name: Install
+        run: npm ci
 
-      - run: npm test
+      - name: Test
+        id: test
+        run: npm test 2>&1 | tee test-output.log
         env:
           CI: true
 
-      - run: npm run build
+      - name: Build
+        id: build
+        run: npm run build
+
+      - name: Job summary
+        if: always()
+        run: |
+          {
+            echo "## CI — $(date -u +'%Y-%m-%d %H:%M UTC')"
+            echo ""
+            echo "| Step | Result |"
+            echo "|------|--------|"
+            echo "| Test | ${{ steps.test.outcome }} |"
+            echo "| Build | ${{ steps.build.outcome }} |"
+            echo ""
+            echo "[View full logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload test log on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-output
+          path: test-output.log
+          retention-days: 7
