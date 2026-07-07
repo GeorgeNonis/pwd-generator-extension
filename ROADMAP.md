@@ -15,7 +15,7 @@ Post-polish improvements. Ordered by impact for users and portfolio signal.
 
 | Item | Why |
 |------|-----|
-| **Chrome Web Store listing** | Public install link for wider distribution |
+| ~~**Chrome Web Store listing**~~ | In progress — v1.1.0 assets in `store_assets/`, copy in `docs/STORE_LISTING.md` |
 | ~~**Passphrase mode**~~ | Done — diceware-style memorable passwords |
 | ~~**Exclude ambiguous chars**~~ | Done — settings toggle |
 | ~~**Theme toggle**~~ | Done — light/dark with storage persistence |

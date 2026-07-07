@@ -17,6 +17,9 @@
 | `src/lib/exportHistory.ts` | History `.txt` export (pure, tested) |
 | `icons/` | Extension icons 16 / 48 / 128 PNG |
 | `docs/BEHAVIOR.md` | Spec IDs mapped to tests |
+| `docs/STORE_LISTING.md` | Chrome Web Store copy + additional fields |
+| `docs/STORE_ASSETS.md` | Store graphic asset checklist |
+| `store_assets/` | Icons + 1280×800 screenshots for store upload |
 | `manifest.json` | MV3, `storage` permission, popup action, commands, service worker |
 | `src/background.ts` | Handles `regenerate-password` keyboard command |
 | `webpack.config.js` | Build → `dist/` for Load unpacked |

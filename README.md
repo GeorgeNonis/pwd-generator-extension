@@ -50,7 +50,12 @@ npm run watch    # rebuild on change — reload extension after each build
 npm test         # run behavior specs (see docs/BEHAVIOR.md)
 ```
 
-Preview UI in a browser (chrome API mocked): open `dist/js/preview.html` via a local server after build.
+Preview UI in a browser (chrome API mocked): serve `dist/` and open `js/preview.html`.
+
+## Chrome Web Store
+
+- Listing copy: [`docs/STORE_LISTING.md`](./docs/STORE_LISTING.md)
+- Graphic assets: [`docs/STORE_ASSETS.md`](./docs/STORE_ASSETS.md) + [`store_assets/`](./store_assets/)
 
 ## Stack
 
@@ -62,4 +67,4 @@ Password generation uses `crypto.getRandomValues`. Core logic is extracted to `s
 
 ## Roadmap
 
-See [`ROADMAP.md`](./ROADMAP.md) for planned improvements (Chrome Web Store, passphrase mode, E2E).
+See [`ROADMAP.md`](./ROADMAP.md) for planned improvements (CI, E2E).

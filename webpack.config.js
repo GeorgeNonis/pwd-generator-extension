@@ -39,6 +39,7 @@ module.exports = {
                 { from: "icons", to: "../icons" },
                 { from: "icon.png", to: "../icon.png" },
                 { from: "public/preview.html", to: "preview.html" },
+                { from: "public/store-frame.html", to: "store-frame.html" },
             ],
         }),
         ...getHtmlPlugins(["index"]),
