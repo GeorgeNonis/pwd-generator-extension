@@ -12,7 +12,10 @@
 | `src/components/settings/` | Extension settings |
 | `src/App.css` | All popup styling (primary UI touchpoint) |
 | `src/lib/password.ts` | Password generation (pure, tested) |
+| `src/lib/passphrase.ts` | Passphrase generation (pure, tested) |
+| `src/lib/presets.ts` | Banking / WiFi / PIN preset definitions |
 | `src/lib/exportHistory.ts` | History `.txt` export (pure, tested) |
+| `icons/` | Extension icons 16 / 48 / 128 PNG |
 | `docs/BEHAVIOR.md` | Spec IDs mapped to tests |
 | `manifest.json` | MV3, `storage` permission, popup action, commands, service worker |
 | `src/background.ts` | Handles `regenerate-password` keyboard command |
@@ -36,7 +39,7 @@ Preview without Chrome APIs: serve `dist/` and open `js/preview.html`.
 ## Gotchas
 
 - Build output is `dist/`; manifest popup points to `js/index.html`.
-- `icon.png` copied to `dist/` via webpack CopyPlugin (placeholder — proper multi-size icons on roadmap).
+- `icon.png` copied to `dist/` via webpack CopyPlugin; sized icons in `icons/`.
 - Theme: `data-theme` on `.App` and synced to `.container`; without both, light mode labels inherit wrong color.
 - History row copy: per-row icon in `src/components/history/passwords/pwd/`.
 

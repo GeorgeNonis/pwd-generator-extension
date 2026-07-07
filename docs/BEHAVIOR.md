@@ -13,6 +13,30 @@ Spec-driven behaviors for the Password Generator extension. Tests in `src/**/*.t
 | GEN-05 | Cryptographic randomness by default | Uses `crypto.getRandomValues` (injectable in tests) |
 | GEN-06 | Exclude ambiguous characters | When `excludeAmbiguous` is true, pool omits `0`, `O`, `o`, `1`, `l`, `I`, `i` |
 
+## Passphrase generation (`src/lib/passphrase.ts`)
+
+| ID | Behavior | Acceptance |
+|----|----------|------------|
+| PASS-01 | Generate passphrase of requested word count | Output has `wordCount` words separated by `-` |
+| PASS-02 | Words from bundled word list | Every word ∈ `WORD_LIST` |
+| PASS-03 | Minimum word count | `wordCount` < 1 → `""` |
+| PASS-04 | Cryptographic randomness | Uses injectable random index (default `crypto.getRandomValues`) |
+
+## Password presets (`src/lib/presets.ts`)
+
+| ID | Behavior | Acceptance |
+|----|----------|------------|
+| PRESET-01 | Banking preset | length 16, all character sets enabled |
+| PRESET-02 | WiFi preset | length 12, upper + lower + numbers |
+| PRESET-03 | PIN preset | length 6, numbers only |
+| PRESET-04 | Apply preset updates form | Clicking preset sets length and charset toggles |
+
+## Extension icons (`manifest.json` + `icons/`)
+
+| ID | Behavior | Acceptance |
+|----|----------|------------|
+| ICON-01 | Multi-size icons in manifest | `icons/` provides 16, 48, 128 PNG paths |
+
 ## Generator UI (`PasswordGeneratorForm`)
 
 | ID | Behavior | Acceptance |
@@ -24,6 +48,10 @@ Spec-driven behaviors for the Password Generator extension. Tests in `src/**/*.t
 | UI-GEN-05 | Copy feedback | “Copied” notification appears then clears |
 | UI-GEN-06 | Strength bars optional | Bars hidden unless “Show strength” is checked |
 | UI-GEN-07 | Strength bars reflect length | Filled bar count matches generated password length |
+| UI-GEN-08 | Mode toggle | Password / Passphrase mode switch visible on generator tab |
+| UI-GEN-09 | Preset buttons | Banking, WiFi, PIN preset controls visible in password mode |
+| UI-GEN-10 | Passphrase word count | Word-count slider shown in passphrase mode (4–8) |
+| UI-GEN-11 | Preset applies settings | Clicking Banking sets length 16 and enables all char sets |
 
 ## Navigation (`Navbar`)
 

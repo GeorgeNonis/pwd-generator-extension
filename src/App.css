@@ -135,6 +135,74 @@ body {
   gap: 1rem;
 }
 
+.mode-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.375rem;
+  padding: 0.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+
+.mode-btn {
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.mode-btn:hover {
+  color: var(--text);
+  background: var(--surface-raised);
+}
+
+.mode-btn.active {
+  color: var(--text);
+  background: var(--accent-muted);
+  border-color: rgba(99, 102, 241, 0.35);
+}
+
+.preset-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.375rem;
+}
+
+.preset-btn {
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.5rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.preset-btn:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.preset-btn.active {
+  color: var(--text);
+  background: var(--accent-muted);
+  border-color: rgba(99, 102, 241, 0.35);
+}
+
+.passphrase-option {
+  padding: 0.375rem 0;
+}
+
 .form-group {
   text-align: left;
 }

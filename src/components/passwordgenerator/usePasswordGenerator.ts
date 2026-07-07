@@ -1,7 +1,18 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, type FormEvent } from "react";
 import { useSelector } from "react-redux";
-import { generatePassword, PasswordOptions } from "../../lib/password";
+import {
+  generatePassword,
+  getStrengthFillCount,
+  PasswordOptions,
+} from "../../lib/password";
+import {
+  generatePassphrase,
+  getPassphraseStrengthFillCount,
+} from "../../lib/passphrase";
+import { getPresetById, PresetId } from "../../lib/presets";
 import { IRootState } from "../../store/store";
+
+export type GenerationMode = "password" | "passphrase";
 
 interface PasswordGeneratorFormProps {
   onGeneratePassword: (password: string) => void;
@@ -13,7 +24,10 @@ export const usePasswordGenerator = ({
   const excludeAmbiguous = useSelector(
     (state: IRootState) => state.pwds.excludeAmbiguous
   );
+  const [generationMode, setGenerationMode] =
+    useState<GenerationMode>("password");
   const [passwordLength, setPasswordLength] = useState(12);
+  const [wordCount, setWordCount] = useState(5);
   const [includeUppercase, setIncludeUppercase] = useState(true);
   const [includeLowercase, setIncludeLowercase] = useState(true);
   const [includeNumbers, setIncludeNumbers] = useState(true);
@@ -22,6 +36,7 @@ export const usePasswordGenerator = ({
   const [showPasswordStrength, setShowPasswordStrength] = useState(true);
   const [generatedPassword, setGeneratedPassword] = useState("");
   const [copyNotification, setCopyNotification] = useState(false);
+  const [activePreset, setActivePreset] = useState<PresetId | null>(null);
 
   const getOptions = useCallback(
     (): PasswordOptions => ({
@@ -43,12 +58,27 @@ export const usePasswordGenerator = ({
   );
 
   const runGenerate = useCallback(() => {
-    const password = generatePassword(getOptions());
+    const password =
+      generationMode === "passphrase"
+        ? generatePassphrase({ wordCount })
+        : generatePassword(getOptions());
+
     setGeneratedPassword(password);
     onGeneratePassword(password);
-  }, [getOptions, onGeneratePassword]);
+  }, [generationMode, getOptions, onGeneratePassword, wordCount]);
 
-  const handleGeneratePassword = (e: React.FormEvent) => {
+  const applyPreset = useCallback((presetId: PresetId) => {
+    const preset = getPresetById(presetId);
+    setGenerationMode("password");
+    setActivePreset(presetId);
+    setPasswordLength(preset.options.length);
+    setIncludeUppercase(preset.options.includeUppercase);
+    setIncludeLowercase(preset.options.includeLowercase);
+    setIncludeNumbers(preset.options.includeNumbers);
+    setIncludeSpecialCharacters(preset.options.includeSpecialCharacters);
+  }, []);
+
+  const handleGeneratePassword = (e: FormEvent) => {
     e.preventDefault();
     runGenerate();
   };
@@ -72,8 +102,26 @@ export const usePasswordGenerator = ({
     setTimeout(() => setCopyNotification(false), 2000);
   };
 
+  const strengthTarget =
+    generationMode === "passphrase" ? wordCount : passwordLength;
+
+  const generatedStrengthUnits =
+    generationMode === "passphrase"
+      ? generatedPassword
+        ? generatedPassword.split("-").length
+        : 0
+      : generatedPassword.length;
+
+  const filledBars =
+    generationMode === "passphrase"
+      ? getPassphraseStrengthFillCount(strengthTarget, generatedStrengthUnits)
+      : getStrengthFillCount(strengthTarget, generatedStrengthUnits);
+
   const values = {
+    activePreset,
     copyNotification,
+    filledBars,
+    generationMode,
     includeLowercase,
     includeNumbers,
     includeSpecialCharacters,
@@ -81,17 +129,22 @@ export const usePasswordGenerator = ({
     showPasswordStrength,
     generatedPassword,
     passwordLength,
+    strengthTarget,
+    wordCount,
   };
 
   const handlers = {
+    applyPreset,
     handleGeneratePassword,
     handleCopyPassword,
+    setGenerationMode,
     setIncludeLowercase,
     setIncludeNumbers,
     setIncludeSpecialCharacters,
     setIncludeUppercase,
     setPasswordLength,
     setShowPasswordStrength,
+    setWordCount,
   };
 
   return { values, handlers };

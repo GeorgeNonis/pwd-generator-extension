@@ -9,6 +9,8 @@ Manifest V3 Chrome extension — configurable password generation, clipboard cop
 ## Features
 
 - Length slider (4–32) with character-set toggles (upper, lower, numbers, symbols)
+- Password presets: Banking, WiFi, PIN
+- Passphrase mode — diceware-style random words (4–8 words)
 - Exclude ambiguous characters (`0`, `O`, `1`, `l`, `I`) via Settings
 - Visual strength indicator
 - One-click copy with feedback

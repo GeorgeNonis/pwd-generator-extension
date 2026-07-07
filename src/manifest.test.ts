@@ -22,4 +22,11 @@ describe("keyboard shortcuts (SHORT)", () => {
   it("SHORT-02: background service worker is registered", () => {
     expect(manifest.background?.service_worker).toBe("js/background.js");
   });
+
+  it("ICON-01: manifest references multi-size icons", () => {
+    expect(manifest.icons["16"]).toBe("icons/icon-16.png");
+    expect(manifest.icons["48"]).toBe("icons/icon-48.png");
+    expect(manifest.icons["128"]).toBe("icons/icon-128.png");
+    expect(manifest.action.default_icon?.["128"]).toBe("icons/icon-128.png");
+  });
 });

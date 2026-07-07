@@ -6,9 +6,9 @@ Post-polish improvements. Ordered by impact for users and portfolio signal.
 
 | Item | Why |
 |------|-----|
-| **Extension icon** | Professional toolbar presence; required for Web Store |
+| ~~**Extension icon**~~ | Done — 16/48/128 PNG assets in `icons/` |
 | ~~**Keyboard shortcut**~~ | Done — `_execute_action` + regenerate command |
-| **Password presets** | “Banking”, “WiFi”, “PIN” one-click length + charset combos |
+| ~~**Password presets**~~ | Done — Banking / WiFi / PIN |
 | ~~**Export history**~~ | Done — download `.txt` locally |
 
 ## Medium term
@@ -16,7 +16,7 @@ Post-polish improvements. Ordered by impact for users and portfolio signal.
 | Item | Why |
 |------|-----|
 | **Chrome Web Store listing** | Public install link for wider distribution |
-| **Passphrase mode** | diceware-style memorable passwords |
+| ~~**Passphrase mode**~~ | Done — diceware-style memorable passwords |
 | ~~**Exclude ambiguous chars**~~ | Done — settings toggle |
 | ~~**Theme toggle**~~ | Done — light/dark with storage persistence |
 
