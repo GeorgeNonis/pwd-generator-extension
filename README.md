@@ -3,7 +3,7 @@
 Manifest V3 Chrome extension — configurable password generation, clipboard copy, and optional history persisted via `chrome.storage.sync`.
 
 [![CI](https://github.com/GeorgeNonis/pwd-generator-extension/actions/workflows/ci.yml/badge.svg)](https://github.com/GeorgeNonis/pwd-generator-extension/actions/workflows/ci.yml)
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/ciplnefaommlkglhkbabmpkckccimajp?label=Install&logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/password-generator-nonis/ciplnefaommlkglhkbabmpkckccimajp)
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/ciplnefaommlkglhkbabmpkckccimajp?label=Install&logo=googlechrome&logoColor=white)](https://chromewebstore.google.com/detail/password-generator/ciplnefaommlkglhkbabmpkckccimajp)
 
 ![Password Generator — password mode with presets](./store_assets/screenshot-01-generator.png)
 
@@ -55,7 +55,7 @@ Preview UI in a browser (chrome API mocked): serve `dist/` and open `js/preview.
 
 ## Chrome Web Store
 
-- [Install from Chrome Web Store](https://chromewebstore.google.com/detail/password-generator-nonis/ciplnefaommlkglhkbabmpkckccimajp)
+- [Install from Chrome Web Store](https://chromewebstore.google.com/detail/password-generator/ciplnefaommlkglhkbabmpkckccimajp)
 - Listing copy: [`docs/STORE_LISTING.md`](./docs/STORE_LISTING.md)
 - Graphic assets: [`docs/STORE_ASSETS.md`](./docs/STORE_ASSETS.md) + [`store_assets/`](./store_assets/)
 
